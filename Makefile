@@ -3,11 +3,12 @@ NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 
-SRC =	push_swap.c \
-		ft_error_checks.c \
+SRC =	ft_error_checks.c \
 		ft_free.c \
 		ft_split.c \
-		listing_process.c
+		listing_process.c \
+		new_vertex_operations.c\
+		push_swap.c
 
 OBJ = $(SRC:.c=.o)
 

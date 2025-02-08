@@ -6,7 +6,7 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:06:53 by bcili             #+#    #+#             */
-/*   Updated: 2025/02/08 19:28:46 by bcili            ###   ########.fr       */
+/*   Updated: 2025/02/08 20:05:29 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_atoi(char *str)
 
 static t_vertex	*for_more_than_two_argv(char **argv, t_vertex **s_a)
 {
-	t_vertex	*temp;
+	t_vertex	*new_vertex;
 	t_vertex	*start_point;
 	int			i;
 
@@ -46,15 +46,14 @@ static t_vertex	*for_more_than_two_argv(char **argv, t_vertex **s_a)
 	{
 		if (i == 0)
 		{
-			start_point = create_new_vertex(ft_atoi(argv[i]));
+			*s_a = create_new_vertex(ft_atoi(argv[i]));
+			start_point = *s_a;
 		}
 		else
 		{
-			(*s_a)->data = ft_atoi(argv[i]);
-			(*s_a)->next = temp;
-			temp = *s_a;
+			new_vertex = create_new_vertex(ft_atoi(argv[i]));
+			add_terminal_vertex(new_vertex, s_a);
 		}
-		*s_a = (*s_a)->next;
 	}
 	return (NULL);
 }
@@ -76,8 +75,8 @@ static t_vertex	*for_two_argv(char **a, t_vertex **s_a)
 		}
 		else
 		{
-			new_vertex->next = *s_a;
-			*s_a = new_vertex;
+			new_vertex = create_new_vertex(ft_atoi(a[i]));
+			add_terminal_vertex(new_vertex, s_a);
 		}
 	}
 	return (start_point);
