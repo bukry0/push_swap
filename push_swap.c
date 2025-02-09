@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	ft_error(void)
 {
@@ -26,6 +27,11 @@ int	main(int argc, char **argv)
 		return (ft_error(), 0);
 	if (!error_check(argv, argc))
 		return (0);
-	stacks->s_a = malloc(sizeof(t_vertex));
+	stacks->s_a = malloc(sizeof(t_node));
 	stacks->s_a = transfer_to_list(argv, argc, &stacks->s_a);
+	while (stacks->s_a->next)
+	{
+		printf("%d ", stacks->s_a->data);
+		stacks->s_a = stacks->s_a->next;
+	}
 }

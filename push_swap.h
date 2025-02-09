@@ -16,29 +16,29 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_vertex
+typedef struct s_node
 {
 	int				data;
-	struct s_vertex	*next;
-}	t_vertex;
+	struct s_node	*next;
+}	t_node;
 
 typedef struct s_stacks
 {
-	t_vertex	*s_a;
-	t_vertex	*s_b;
+	t_node	*s_a;
+	t_node	*s_b;
 }	t_stacks;
 
-void		add_terminal_vertex(t_vertex *node, t_vertex **s_a);
-t_vertex	*create_new_vertex(int data);
+void		add_terminal_node(t_node *node, t_node **s_a);
+t_node  	*create_new_node(int data);
 int			error_check(char **argv, int argc);
 void		free_split(char **a);
-int			ft_atoi(char *str);
+long long	ft_atoi(char *str);
 void		ft_error(void);
 int			ft_isdigit(char *str);
 int			ft_isequal(char **argv, int i);
 char		**ft_split(char const *s, char c);
-int			ft_strcmp(char *s1, char *s2);
+int			ft_numcmp(char *s1, char *s2);
 size_t		ft_strlen(const char *s);
-t_vertex	*transfer_to_list(char **argv, int argc, t_vertex **s_a);
+t_node		*transfer_to_list(char **argv, int argc, t_node **s_a);
 
 #endif

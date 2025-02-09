@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-int	ft_atoi(char *str)
+long long	ft_atoi(char *str)
 {
-	int	result;
-	int	sign;
+	long long	result;
+	int 		sign;
 
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
@@ -32,66 +32,41 @@ int	ft_atoi(char *str)
 		result = result * 10 + *str - '0';
 		str++;
 	}
-	return (sign * result);
+	result = sign * result;
+	if (result < -2147483648 || result > 2147483647)
+		return (-2147483649);
+	return (result);
 }
 
-static t_vertex	*for_more_than_two_argv(char **argv, t_vertex **s_a)
+static t_node	*transfer_operation(char **a, t_node **s_a)
 {
-	t_vertex	*new_vertex;
-	t_vertex	*start_point;
-	int			i;
+	t_node	*new_node;
+	int		i;
 
 	i = -1;
-	while (argv[++i])
-	{
-		if (i == 0)
-		{
-			*s_a = create_new_vertex(ft_atoi(argv[i]));
-			start_point = *s_a;
-		}
-		else
-		{
-			new_vertex = create_new_vertex(ft_atoi(argv[i]));
-			add_terminal_vertex(new_vertex, s_a);
-		}
-	}
-	return (NULL);
-}
-
-static t_vertex	*for_two_argv(char **a, t_vertex **s_a)
-{
-	t_vertex	*new_vertex;
-	t_vertex	*start_point;
-	int			i;
-
-	i = -1;
-	start_point = NULL;
 	while (a[++i])
 	{
 		if (i == 0)
-		{
-			*s_a = create_new_vertex(ft_atoi(a[i]));
-			start_point = *s_a;
-		}
+			*s_a = create_new_node(ft_atoi(a[i]));
 		else
 		{
-			new_vertex = create_new_vertex(ft_atoi(a[i]));
-			add_terminal_vertex(new_vertex, s_a);
+			new_node = create_new_node(ft_atoi(a[i]));
+			add_terminal_node(new_node, s_a);
 		}
 	}
-	return (start_point);
+	return (*s_a);
 }
 
-t_vertex	*transfer_to_list(char **argv, int argc, t_vertex **s_a)
+t_node	*transfer_to_list(char **argv, int argc, t_node **s_a)
 {
-	char		**a;
+	char    **a;
 
 	if (argc == 2)
 	{
 		a = ft_split(argv[1], ' ');
-		return (for_two_argv(a, s_a));
+		return (transfer_operation(a, s_a));
 	}
 	else if (argc > 2)
-		return (for_more_than_two_argv(argv + 1, s_a));
+		return (transfer_operation(argv + 1, s_a));
 	return (NULL);
 }
