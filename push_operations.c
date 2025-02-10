@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_operations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 13:46:39 by bcili             #+#    #+#             */
-/*   Updated: 2025/02/08 18:51:45 by bcili            ###   ########.fr       */
+/*   Created: 2025/02/10 22:08:03 by bcili             #+#    #+#             */
+/*   Updated: 2025/02/10 22:08:03 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-void	ft_error(void)
+void    push_a(t_node **s_a, t_node **s_b)
 {
-	write(1, "Error\n", 6);
+    t_node  *temp;
+
+    if (!(*s_b))
+        return ;
+    temp = (*s_b)->next;
+    (*s_b)->next = (*s_a);
+    (*s_a) = (*s_b);
+    (*s_b) = temp;
+    write(1, "pa\n", 3);
 }
 
-int	main(int argc, char **argv)
+void    push_b(t_node **s_a, t_node **s_b)
 {
-	t_stacks	*stacks;
+    t_node  *temp;
 
-	stacks = malloc(sizeof(t_stacks));
-	if (argc < 2)
-		return (ft_error(), 0);
-	if (!error_check(argv, argc))
-		return (0);
-	stacks->s_a = malloc(sizeof(t_node));
-	stacks->s_a = transfer_to_list(argv, argc, &stacks->s_a);
-	while (stacks->s_a)
-	{
-		printf("%d ", stacks->s_a->data);
-		stacks->s_a = stacks->s_a->next;
-	}
+    if (!(*s_a))
+        return ;
+    temp = (*s_a)->next;
+    (*s_a)->next = (*s_b);
+    (*s_b) = (*s_a);
+    (*s_a) = temp;
+    write(1, "pb\n", 3);
 }

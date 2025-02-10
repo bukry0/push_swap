@@ -21,3 +21,11 @@ void	free_split(char **a)
 		free(a[i]);
 	free(a);
 }
+
+void	free_node(t_node *node)
+{
+	if (!node)
+		return ;
+	node->data = 0;
+	free(node);
+}

@@ -82,7 +82,7 @@ static int	ft_count_word(const char *s, char c, char ***res, int *i)
 	return (count_word);
 }
 
-static int	free_node(char **str, int index)
+static int	free_double_str(char **str, int index)
 {
 	int	i;
 
@@ -120,7 +120,7 @@ char	**ft_split(char const *s, char c)
 		while (s[j] != c && s[j])
 			j++;
 		result[i++] = ft_substr(s, 0, j);
-		if (free_node(result, i) == 0)
+		if (free_double_str(result, i) == 0)
 			return (0);
 		s += j;
 	}
