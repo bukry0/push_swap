@@ -28,11 +28,11 @@ typedef struct s_stacks
 	t_node	*s_b;
 }	t_stacks;
 
-void		add_terminal_node(t_node *node, t_node **s_a);
 t_node  	*create_new_node(int data);
 int			error_check(char **argv, int argc);
 void		free_node(t_node *node);
 void		free_split(char **a);
+void		free_stack(t_node **stack);
 long long	ft_atoi(char *str);
 void		ft_error(void);
 int			ft_isdigit(char *str);
@@ -45,8 +45,8 @@ void    	push_b(t_node **s_a, t_node **s_b);
 void    	rotate_a(t_node **s_a);
 void    	rotate_b(t_node **s_b);
 void    	rotate_both(t_node **s_a, t_node **s_b);
-void		swap_a(t_node **s_a);
-void    	swap_b(t_node **s_b);
+void		swap_a(t_node **s_a, int i);
+void    	swap_b(t_node **s_b, int i);
 void    	swap_both(t_node **s_a, t_node **s_b);
 t_node		*transfer_to_list(char **argv, int argc, t_node **s_a);
 

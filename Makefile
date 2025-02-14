@@ -7,7 +7,6 @@ SRC =	error_checks.c \
 		ft_free.c \
 		ft_split.c \
 		listing_process.c \
-		new_node_operations.c\
 		push_operations.c \
 		push_swap.c \
 		rotate_operations.c \

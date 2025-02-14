@@ -21,17 +21,27 @@ void	ft_error(void)
 int	main(int argc, char **argv)
 {
 	t_stacks	*stacks;
-
+	t_node		*root;
+	t_node		*temp;
+	
 	stacks = malloc(sizeof(t_stacks));
+	if (!stacks)
+		return (ft_error(), 0);
 	if (argc < 2)
 		return (ft_error(), 0);
 	if (!error_check(argv, argc))
 		return (0);
-	stacks->s_a = malloc(sizeof(t_node));
+	
 	stacks->s_a = transfer_to_list(argv, argc, &stacks->s_a);
-	while (stacks->s_a)
+	root = stacks->s_a;
+	temp = stacks->s_a;
+	while (temp)
 	{
-		printf("%d ", stacks->s_a->data);
-		stacks->s_a = stacks->s_a->next;
+		printf("%d ", temp->data);
+		temp = temp->next;
 	}
+	printf("\n");
+	free_stack(&root);
+	free(stacks);
 }
+

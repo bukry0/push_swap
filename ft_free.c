@@ -29,3 +29,15 @@ void	free_node(t_node *node)
 	node->data = 0;
 	free(node);
 }
+
+void	free_stack(t_node **stack)
+{
+	t_node	*temp;
+
+	while (*stack)
+	{
+		temp = (*stack)->next;
+		free(*stack);
+		*stack = temp;
+	}	
+}

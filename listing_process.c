@@ -38,6 +38,18 @@ long long	ft_atoi(char *str)
 	return (result);
 }
 
+t_node	*create_new_node(int data)
+{
+	t_node	*new_node;
+
+	new_node = (t_node *)malloc(sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	new_node->data = data;
+	new_node->next = NULL;
+	return (new_node);
+}
+
 static t_node	*transfer_operation(char **a, t_node **s_a)
 {
 	t_node	*new_node;
@@ -46,13 +58,11 @@ static t_node	*transfer_operation(char **a, t_node **s_a)
 	i = -1;
 	while (a[++i])
 	{
-		if (i == 0)
-			*s_a = create_new_node(ft_atoi(a[i]));
-		else
-		{
-			new_node = create_new_node(ft_atoi(a[i]));
-			add_terminal_node(new_node, s_a);
-		}
+		new_node = create_new_node(ft_atoi(a[i]));
+		if (!new_node)
+			return (free_stack(s_a), NULL);
+		new_node->next = (*s_a);
+		(*s_a) = new_node;
 	}
 	return (*s_a);
 }
@@ -60,11 +70,16 @@ static t_node	*transfer_operation(char **a, t_node **s_a)
 t_node	*transfer_to_list(char **argv, int argc, t_node **s_a)
 {
 	char    **a;
+	t_node	*result;
 
 	if (argc == 2)
 	{
 		a = ft_split(argv[1], ' ');
-		return (transfer_operation(a, s_a));
+		if (!a)
+			return (NULL);
+		result = transfer_operation(a, s_a);
+		free_split(a);
+		return (result);
 	}
 	else if (argc > 2)
 		return (transfer_operation(argv + 1, s_a));

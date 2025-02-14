@@ -11,46 +11,67 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
-void    swap_a(t_node **s_a)
+void    swap_a(t_node **s_a, int i)
 {
-    t_node  *temp;
+    t_node	*iter1;
+    t_node  *iter2;
+	t_node	*temp;
 
-    if (!(*s_a) || !((*s_a)->next))
+	if (!(*s_a) || !((*s_a)->next))
         return ;
-    temp = (*s_a)->next;
-    (*s_a)->next = temp->next;
-    temp->next = (*s_a);
-    *s_a = temp;
-    write (1, "sa\n", 3);
+    iter1 = *s_a;
+	while (iter1->next->next)
+        iter1 = iter1->next;
+    temp = iter1->next;
+	iter1->next = NULL;
+	temp->next = iter1;
+	if (*s_a == iter1)
+        *s_a = temp;
+	else
+	{
+        iter2 = *s_a;
+        while (iter2->next != iter1)
+        {
+            iter2 = iter2->next;
+        }
+		iter2->next = temp;
+	}
+    if (i == 1)
+        write (1, "sa\n", 3);
 }
 
-void    swap_b(t_node **s_b)
+void    swap_b(t_node **s_b, int i)
 {
-    t_node  *temp;
+    t_node	*iter1;
+    t_node  *iter2;
+	t_node	*temp;
 
-    if (!(*s_b) || !((*s_b)->next))
-        return ;
-    temp = (*s_b)->next;
-    (*s_b)->next = temp->next;
-    temp->next = (*s_b);
-    *s_b = temp;
-    write (1, "sb\n", 3);
+	if (!(*s_b) || !((*s_b)->next))
+		return ;
+	iter1 = *s_b;
+	while (iter1->next->next)
+		iter1 = iter1->next;
+	temp = iter1->next;
+	iter1->next = NULL;
+	temp->next = iter1;
+	if (*s_b == iter1)
+		*s_b = temp;
+	else
+	{
+        iter2 = *s_b;
+		while (iter2->next != iter1)
+			iter2 = iter2->next;
+		iter2->next = temp;
+	}
+    if (i == 1)
+        write (1, "sa\n", 3);
 }
 
 void    swap_both(t_node **s_a, t_node **s_b)
 {
-    t_node  *temp;
-
-    if (!(*s_a) || !((*s_a)->next) || !(*s_b) || ((*s_b)->next))
-        return ;
-    temp = (*s_a)->next;
-    (*s_a)->next = temp->next;
-    temp->next = (*s_a);
-    *s_a = temp;
-    temp = (*s_b)->next;
-    (*s_b)->next = temp->next;
-    temp->next = (*s_b);
-    *s_b = temp;
-    write (1, "ss\n", 3);
+    swap_a(s_a, 0);
+    swap_b(s_b, 0);
+    write(1, "ss\n", 3);
 }
