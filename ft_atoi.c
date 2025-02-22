@@ -12,15 +12,15 @@
 
 #include "push_swap.h"
 
-static int	check_overflow(long long result, int sign)
+static long long	check_overflow(long long result, int sign)
 {
 	result *= sign;
-	if (result > INT_MAX || result < INT_MIN)
-		return (0);
-	return ((int)result);
+	if (result > 2147483647 || result < -2147483648)
+		return (-2147483649);
+	return (result);
 }
 
-static int	handle_sign(const char **str)
+static int	handle_sign(char **str)
 {
 	int	sign;
 
@@ -42,7 +42,7 @@ long long	ft_atoi(char *str)
 	int			sign;
 
 	result = 0;
-	sign = handle_sign((const char **)&str);
+	sign = handle_sign(&str);
 	while (*str >= '0' && *str <= '9')
 	{
 		result = result * 10 + (*str - '0');

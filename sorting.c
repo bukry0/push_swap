@@ -28,42 +28,20 @@ static int	is_sorted(t_node **stack)
 	return (1);
 }
 
-static void	sort_three_case_one(t_node **s_a)
-{
-	swap_a(s_a);
-	reverse_rotate_a(s_a);
-}
-
-static void	sort_three_elements(t_node **s_a, int a, int b, int c)
-{
-	if (a > b && b > c)
-		sort_three_case_one(s_a);
-	else if (a > b && a > c)
-		rotate_a(s_a);
-	else if (b > c)
-		reverse_rotate_a(s_a);
-}
-
 void	sorting_for_three(t_node **s_a)
 {
-	int	a;
-	int	b;
-	int	c;
-
-	if (!s_a || !(*s_a) || !(*s_a)->next)
-		return ;
-	if (!(*s_a)->next->next)
-	{
-		if (!s_a || !(*s_a) || !(*s_a)->next)
-		    return ;
-	    if ((*s_a)->data > (*s_a)->next->data)
-		    swap_a(s_a);
-		return ;
-	}
-	a = (*s_a)->data;
-	b = (*s_a)->next->data;
-	c = (*s_a)->next->next->data;
-	sort_three_elements(s_a, a, b, c);
+	if (is_sorted(s_a))
+        return ;
+    if ((*s_a)->data > (*s_a)->next->data)
+        swap_a(s_a);
+    if ((*s_a)->data > (*s_a)->next->next->data)
+        reverse_rotate_a(s_a);
+    if ((*s_a)->next->data > (*s_a)->next->next->data)
+    {
+        rotate_a(s_a);
+        swap_a(s_a);
+        reverse_rotate_a(s_a);
+    }
 }
 
 void	sorting(t_stacks *stacks)

@@ -44,7 +44,7 @@ static int	process_number(char *str, t_node **stack)
 	int		num;
 	t_node	*new_node;
 
-	num = ft_atoi(str);
+	num = (int)ft_atoi(str);
 	if (num == 0 && str[0] != '0')
 		return (0);
 	new_node = create_new_node(num);

@@ -37,7 +37,7 @@ static int	check_number_duplicate(char **argv, int i)
 	j = i;
 	while (argv[++j])
 	{
-		if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
+		if (ft_atoi(argv[i]) == ft_atoi(argv[j]) || ft_atoi(argv[i]) == -2147483649)
 			return (0);
 	}
 	return (1);
