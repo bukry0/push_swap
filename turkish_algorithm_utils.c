@@ -1,43 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   turkish_algorithm_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/22 14:10:12 by bcili             #+#    #+#             */
-/*   Updated: 2025/02/22 14:10:12 by bcili            ###   ########.fr       */
+/*   Created: 2025/02/22 16:46:08 by bcili             #+#    #+#             */
+/*   Updated: 2025/02/22 16:46:08 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_split(char **arr)
+int	stack_len(t_node *stack)
 {
-	int	i;
+	int	len;
 
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
-}
-
-void	free_node(t_node *node)
-{
-	if (!node)
-		return ;
-	node->data = 0;
-	free(node);
-}
-
-void	free_stack(t_node **stack)
-{
-	t_node	*temp;
-
-	while (*stack)
+	len = 0;
+	while (stack)
 	{
-		temp = (*stack)->next;
-		free_node(*stack);
-		*stack = temp;
+		len++;
+		stack = stack->next;
 	}
+	return (len);
+}
+
+int	get_position(t_node *stack, t_node *node)
+{
+	int	pos;
+
+	pos = 0;
+	while (stack)
+	{
+		if (stack == node)
+			return (pos);
+		pos++;
+		stack = stack->next;
+	}
+	return (-1);
 }

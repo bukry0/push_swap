@@ -5,44 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 17:06:53 by bcili             #+#    #+#             */
-/*   Updated: 2025/02/08 20:05:29 by bcili            ###   ########.fr       */
+/*   Created: 2025/02/22 14:11:21 by bcili             #+#    #+#             */
+/*   Updated: 2025/02/22 14:11:21 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long long	ft_atoi(char *str)
-{
-	long long	result;
-	int 		sign;
-
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	sign = 1;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	result = 0;
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + *str - '0';
-		str++;
-	}
-	result = sign * result;
-	if (result < -2147483648 || result > 2147483647)
-		return (-2147483649);
-	return (result);
-}
-
 t_node	*create_new_node(int data)
 {
 	t_node	*new_node;
 
-	new_node = (t_node *)malloc(sizeof(t_node));
+	new_node = malloc(sizeof(t_node));
 	if (!new_node)
 		return (NULL);
 	new_node->data = data;
@@ -50,38 +24,74 @@ t_node	*create_new_node(int data)
 	return (new_node);
 }
 
-static t_node	*transfer_operation(char **a, t_node **s_a)
+static void	add_node_to_stack(t_node **stack, t_node *new_node)
 {
-	t_node	*new_node;
-	int		i;
+	t_node	*temp;
 
-	i = -1;
-	while (a[++i])
+	if (!*stack)
+		*stack = new_node;
+	else
 	{
-		new_node = create_new_node(ft_atoi(a[i]));
-		if (!new_node)
-			return (free_stack(s_a), NULL);
-		new_node->next = (*s_a);
-		(*s_a) = new_node;
+		temp = *stack;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new_node;
 	}
-	return (*s_a);
 }
 
-t_node	*transfer_to_list(char **argv, int argc, t_node **s_a)
+static int	process_number(char *str, t_node **stack)
 {
-	char    **a;
-	t_node	*result;
+	int		num;
+	t_node	*new_node;
+
+	num = ft_atoi(str);
+	if (num == 0 && str[0] != '0')
+		return (0);
+	new_node = create_new_node(num);
+	if (!new_node)
+		return (0);
+	add_node_to_stack(stack, new_node);
+	return (1);
+}
+
+static t_node	*process_split_args(char **args, t_node **stack)
+{
+	int	i;
+
+	i = -1;
+	while (args[++i])
+	{
+		if (!process_number(args[i], stack))
+		{
+			free_split(args);
+			free_stack(stack);
+			return (NULL);
+		}
+	}
+	free_split(args);
+	return (*stack);
+}
+
+t_node	*transfer_to_list(char **argv, int argc, t_node **stack)
+{
+	char	**args;
+	int		i;
 
 	if (argc == 2)
 	{
-		a = ft_split(argv[1], ' ');
-		if (!a)
+		args = ft_split(argv[1], ' ');
+		if (!args)
 			return (NULL);
-		result = transfer_operation(a, s_a);
-		free_split(a);
-		return (result);
+		return (process_split_args(args, stack));
 	}
-	else if (argc > 2)
-		return (transfer_operation(argv + 1, s_a));
-	return (NULL);
+	i = 0;
+	while (argv[++i])
+	{
+		if (!process_number(argv[i], stack))
+		{
+			free_stack(stack);
+			return (NULL);
+		}
+	}
+	return (*stack);
 }
