@@ -6,7 +6,7 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 16:07:54 by bcili             #+#    #+#             */
-/*   Updated: 2025/02/22 16:07:54 by bcili            ###   ########.fr       */
+/*   Updated: 2025/02/28 16:42:49 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,12 @@ long long	ft_atoi(char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		result = result * 10 + (*str - '0');
+		if (check_overflow(result, sign) == -2147483649)
+		{
+			ft_error();
+			exit(1);
+		}
 		str++;
 	}
-	return (check_overflow(result, sign));
+	return (result * sign);
 }

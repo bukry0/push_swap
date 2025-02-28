@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/22 14:15:52 by bcili             #+#    #+#             */
-/*   Updated: 2025/02/22 14:15:52 by bcili            ###   ########.fr       */
+/*   Created: 2025/02/28 14:11:21 by bcili             #+#    #+#             */
+/*   Updated: 2025/02/28 17:31:24 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,31 @@ static int	is_sorted(t_node **stack)
 
 void	sorting_for_three(t_node **s_a)
 {
+	int	first;
+	int	second;
+	int	third;
+
+	first = (*s_a)->data;
+	second = (*s_a)->next->data;
+	third = (*s_a)->next->next->data;
 	if (is_sorted(s_a))
-        return ;
-    if ((*s_a)->data > (*s_a)->next->data)
-        swap_a(s_a);
-    if ((*s_a)->data > (*s_a)->next->next->data)
-        reverse_rotate_a(s_a);
-    if ((*s_a)->next->data > (*s_a)->next->next->data)
-    {
-        rotate_a(s_a);
-        swap_a(s_a);
-        reverse_rotate_a(s_a);
-    }
+		return ;
+	if (first < second && second > third && first < third)
+	{
+		reverse_rotate_a(s_a);
+		swap_a(s_a);
+	}
+	else if (first > second && second < third && first < third)
+		swap_a(s_a);
+	else if (first < second && second > third && first > third)
+		reverse_rotate_a(s_a);
+	else if (first > second && second < third && first > third)
+		rotate_a(s_a);
+	else if (first > second && second > third && first > third)
+	{
+		rotate_a(s_a);
+		swap_a(s_a);
+	}
 }
 
 void	sorting(t_stacks *stacks)
@@ -54,10 +67,10 @@ void	sorting(t_stacks *stacks)
 		return ;
 	len = stack_len(stacks->s_a);
 	if (len == 2)
-    {
-	    if (stacks->s_a->data > stacks->s_a->next->data)
-		    swap_a(&stacks->s_a);
-    }
+	{
+		if (stacks->s_a->data > stacks->s_a->next->data)
+			swap_a(&stacks->s_a);
+	}
 	else if (len == 3)
 		sorting_for_three(&stacks->s_a);
 	else

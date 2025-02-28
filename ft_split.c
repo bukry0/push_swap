@@ -5,24 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/22 14:10:46 by bcili             #+#    #+#             */
-/*   Updated: 2025/02/22 14:10:46 by bcili            ###   ########.fr       */
+/*   Created: 2025/02/04 18:51:54 by bcili             #+#    #+#             */
+/*   Updated: 2025/02/04 18:57:38 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
 
 static char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
