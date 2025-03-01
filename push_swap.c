@@ -27,7 +27,7 @@ int	ft_write(const char *str)
 
 void	ft_error(void)
 {
-	write(2, "Error\n", 6);
+	ft_write("Error\n");
 }
 
 static void	init_stacks(t_stacks **stacks)
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 	if (!stacks)
 		return (ft_error(), 0);
 	if (!transfer_to_list(argv, argc, &stacks->s_a))
-		return (free(stacks), 0);
+		return (free(stacks), free_stack(&stacks->s_a), 0);
 	sorting(stacks);
 	free_stack(&stacks->s_a);
 	free_stack(&stacks->s_b);

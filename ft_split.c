@@ -99,7 +99,7 @@ char	**ft_split(char const *s, char c)
 		while (s[j] != c && s[j])
 			j++;
 		result[i++] = ft_substr(s, 0, j);
-		if (free_split_node(result, i) == 0)
+		if (!free_split_node(result, i))
 			return (0);
 		s += j;
 	}
