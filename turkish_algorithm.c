@@ -6,85 +6,129 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:13:16 by bcili             #+#    #+#             */
-/*   Updated: 2025/02/28 14:14:04 by bcili            ###   ########.fr       */
+/*   Updated: 2025/03/01 14:07:55 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rotate_stack(t_node **stack, int times, char stack_name)
+int	calculate_index(t_node *node, int data)
 {
-	while (times > 0)
-	{
-		if (stack_name == 'a')
-			rotate_a(stack);
-		else
-			rotate_b(stack);
-		times--;
-	}
-}
-
-static void	reverse_rotate_stack(t_node **stack, int times, char stack_name)
-{
-	while (times > 0)
-	{
-		if (stack_name == 'a')
-			reverse_rotate_a(stack);
-		else
-			reverse_rotate_b(stack);
-		times--;
-	}
-}
-
-static void	rotate_to_position(t_node **stack, int pos, char stack_name)
-{
-	int	len;
-
-	len = stack_len(*stack);
-	if (pos <= len / 2)
-		rotate_stack(stack, pos, stack_name);
-	else
-		reverse_rotate_stack(stack, len - pos, stack_name);
-}
-
-static int	find_min_pos(t_node *stack)
-{
+	int		i;
 	t_node	*temp;
-	int		min_pos;
-	int		min_val;
-	int		pos;
 
-	temp = stack;
-	min_val = temp->data;
-	min_pos = 0;
-	pos = 0;
-	while (temp)
+	temp = node;
+	i = 0;
+	while (temp && temp->data != data)
 	{
-		if (temp->data < min_val)
-		{
-			min_val = temp->data;
-			min_pos = pos;
-		}
-		pos++;
+		i++;
 		temp = temp->next;
 	}
-	return (min_pos);
+	return (i);
+}
+
+static void	sorter_push(t_stacks *stacks, int num_a, int num_b, char push_stack)
+{
+	int	index_a;
+	int	index_b;
+	int	len_a;
+	int	len_b;
+
+	len_a = stack_len(stacks->s_a);
+	len_b = stack_len(stacks->s_b);
+	if (stack_len(stacks->s_a) % 2 == 1)
+		len_a = stack_len(stacks->s_a) + 1;
+	if (stack_len(stacks->s_b) % 2 == 1)
+		len_b = stack_len(stacks->s_b) + 1;
+	index_a = calculate_index(stacks->s_a, num_a);
+	index_b = calculate_index(stacks->s_b, num_b);
+	if (len_a / 2 > index_a && len_b / 2 > index_b)
+		plus_plus(stacks, num_a, num_b, push_stack);
+	else if (len_a / 2 <= index_a && len_b / 2 > index_b)
+		minus_plus(stacks, num_a, num_b, push_stack);
+	else if (len_a / 2 > index_a && len_b / 2 <= index_b)
+		plus_minus(stacks, num_a, num_b, push_stack);
+	else if (len_a / 2 <= index_a && len_b / 2 <= index_b)
+		minus_minus(stacks, num_a, num_b, push_stack);
+}
+
+static int	number_find_b(t_stacks *stacks, int data_a)
+{
+	int		min;
+	int		max;
+	int		count;
+	t_node	*temp_b;
+
+	count = 0;
+	min = -2147483648;
+	max = -2147483648;
+	temp_b = stacks->s_b;
+	while (temp_b)
+	{
+		if (temp_b->data < data_a && temp_b->data > min)
+		{
+			min = temp_b->data;
+			count++;
+		}
+		else if (temp_b->data > data_a && temp_b->data > max)
+			max = temp_b->data;
+		temp_b = temp_b->next;
+	}
+	if (count > 0)
+		return (min);
+	return (max);
+}
+
+static int	number_a(t_stacks *stacks, int result_move, int result_num)
+{
+	int		move;
+	int		num_b;
+	int		index_a;
+	int		index_b;
+	t_node	*temp;
+
+	temp = stacks->s_a;
+	while (temp)
+	{
+		num_b = number_find_b(stacks, temp->data);
+		index_a = calculate_index(stacks->s_a, temp->data);
+		index_b = calculate_index(stacks->s_b, num_b);
+		move = move_count(stacks, index_a, index_b, stack_len(stacks->s_a));
+		if (move < result_move)
+		{
+			result_move = move;
+			result_num = temp->data;
+		}
+		temp = temp->next;
+	}
+	return (result_num);
 }
 
 void	turkish_algorithm(t_stacks *stacks)
 {
-	int	len;
-	int	min_pos;
+	int	num_a;
+	int	num_b;
 
-	len = stack_len(stacks->s_a);
-	while (len > 3)
+	num_a = 0;
+	num_b = 0;
+	push_b(&stacks->s_a, &stacks->s_b);
+	if (stack_len(stacks->s_a) > 3)
 	{
-		min_pos = find_min_pos(stacks->s_a);
-		rotate_to_position(&stacks->s_a, min_pos, 'a');
 		push_b(&stacks->s_a, &stacks->s_b);
-		len--;
+		while (stack_len(stacks->s_a) > 3)
+		{
+			num_a = number_a(stacks, 2147483647, 2147483647);
+			num_b = number_find_b(stacks, num_a);
+			sorter_push(stacks, num_a, num_b, 'b');
+		}
+		max_number_find_b(stacks, stacks->s_b->data);
 	}
 	sorting_for_three(&stacks->s_a);
 	while (stacks->s_b)
-		push_a(&stacks->s_a, &stacks->s_b);
+	{
+		num_a = number_find_a(stacks, stacks->s_b->data);
+		sorter_push(stacks, num_a, stacks->s_b->data, 'a');
+	}
+	if (!is_sorted(&stacks->s_a))
+		first_min_number_a(stacks, min_number_a(stacks));
 }

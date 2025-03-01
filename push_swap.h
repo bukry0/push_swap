@@ -58,8 +58,20 @@ t_node		*transfer_to_list(char **argv, int argc, t_node **s_a);
 int			stack_len(t_node *stack);
 int			get_position(t_node *stack, t_node *node);
 
+int			is_sorted(t_node **stack);
 void		sorting(t_stacks *stacks);
 void		sorting_for_three(t_node **s_a);
 void		turkish_algorithm(t_stacks *stacks);
+
+int			calculate_index(t_node *node, int data);
+int			number_find_a(t_stacks *stacks, int data_b);
+int			min_number_a(t_stacks *stacks);
+void		first_min_number_a(t_stacks *stacks, int data_a);
+void		max_number_find_b(t_stacks *stacks, int data_b);
+int			move_count(t_stacks *stacks, int index_a, int index_b, int len_a);
+void		plus_plus(t_stacks *stacks, int num_a, int num_b, char push_stack);
+void		minus_plus(t_stacks *stacks, int num_a, int num_b, char push_stack);
+void		plus_minus(t_stacks *stacks, int num_a, int num_b, char push_stack);
+void		minus_minus(t_stacks *stacks, int num_a, int num_b, char push_stck);
 
 #endif

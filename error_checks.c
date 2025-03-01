@@ -80,7 +80,7 @@ int	error_check(char **argv, int argc)
 	if (argc == 2)
 	{
 		if (!*argv[1])
-			return (ft_error(), 0);
+			return (0);
 		a = ft_split(argv[1], ' ');
 		i = -1;
 		while (a[++i])

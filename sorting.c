@@ -6,13 +6,13 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:11:21 by bcili             #+#    #+#             */
-/*   Updated: 2025/02/28 17:31:24 by bcili            ###   ########.fr       */
+/*   Updated: 2025/03/01 12:34:22 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	is_sorted(t_node **stack)
+int	is_sorted(t_node **stack)
 {
 	t_node	*temp;
 

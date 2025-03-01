@@ -9,13 +9,15 @@ SRC =	error_checks.c \
 		ft_split.c \
 		listing_process.c \
 		push_operations.c \
-		swap_operations.c \
-		rotate_operations.c \
-		reverse_rotate_operations.c \
-		sorting.c \
-		turkish_algorithm_utils.c \
-		turkish_algorithm.c \
 		push_swap.c \
+		reverse_rotate_operations.c \
+		rotate_operations.c \
+		sorting.c \
+		swap_operations.c \
+		turkish_algorithm.c \
+		turkish_algorithm_utils.c \
+		turkish_algorithm_utils_a.c \
+		turkish_algorithm_utils_b.c
 
 OBJ = $(SRC:.c=.o)
 

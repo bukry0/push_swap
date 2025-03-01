@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "stdio.h"
 
 int	ft_write(const char *str)
 {
@@ -44,11 +45,11 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
+	if (!error_check(argv, argc))
+		return (0);
 	init_stacks(&stacks);
 	if (!stacks)
 		return (ft_error(), 0);
-	if (!error_check(argv, argc))
-		return (free(stacks), 0);
 	if (!transfer_to_list(argv, argc, &stacks->s_a))
 		return (free(stacks), 0);
 	sorting(stacks);

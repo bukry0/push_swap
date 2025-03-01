@@ -6,7 +6,7 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:15:35 by bcili             #+#    #+#             */
-/*   Updated: 2025/02/28 14:15:38 by bcili            ###   ########.fr       */
+/*   Updated: 2025/03/01 14:15:06 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,68 @@ int	stack_len(t_node *stack)
 	return (len);
 }
 
-int	get_position(t_node *stack, t_node *node)
+static void	max_number_top_b(t_stacks *stacks, int max_index)
 {
-	int	pos;
-
-	pos = 0;
-	while (stack)
+	if (stack_len(stacks->s_b) / 2 > max_index)
 	{
-		if (stack == node)
-			return (pos);
-		pos++;
-		stack = stack->next;
+		while (max_index > 0)
+		{
+			rotate_b(&stacks->s_b);
+			max_index--;
+		}
 	}
-	return (-1);
+	else if (stack_len(stacks->s_b) / 2 < max_index)
+	{
+		while (max_index < stack_len(stacks->s_b))
+		{
+			reverse_rotate_b(&stacks->s_b);
+			max_index++;
+		}
+	}
+}
+
+void	max_number_find_b(t_stacks *stacks, int data_b)
+{
+	int		max;
+	int		max_index;
+	t_node	*temp_b;
+
+	max = -2147483648;
+	temp_b = stacks->s_b;
+	while (temp_b)
+	{
+		if (temp_b->data > data_b && temp_b->data > max)
+			max = temp_b->data;
+		temp_b = temp_b->next;
+	}
+	max_index = calculate_index(stacks->s_b, max);
+	max_number_top_b(stacks, max_index);
+}
+
+int	move_count(t_stacks *stacks, int index_a, int index_b, int len_a)
+{
+	int	len_b;
+
+	len_b = stack_len(stacks->s_b);
+	if (stack_len(stacks->s_a) % 2 == 1)
+		len_a = stack_len(stacks->s_a) + 1;
+	if (stack_len(stacks->s_b) % 2 == 1)
+		len_b = stack_len(stacks->s_b) + 1;
+	if (len_a / 2 > index_a && len_b / 2 > index_b)
+	{
+		if (index_a >= index_b)
+			return (index_a);
+		return (index_b);
+	}
+	else if (len_a / 2 <= index_a && len_b / 2 > index_b)
+		return (((index_a - stack_len(stacks->s_a)) * (-1)) + index_b);
+	else if (len_a / 2 > index_a && len_b / 2 <= index_b)
+		return (((index_b - stack_len(stacks->s_b)) * (-1)) + index_a);
+	else if (len_a / 2 <= index_a && len_b / 2 <= index_b)
+	{
+		if (stack_len(stacks->s_a) - index_a > stack_len(stacks->s_b) - index_b)
+			return ((index_a - stack_len(stacks->s_a)) * (-1));
+		return ((index_b - stack_len(stacks->s_b)) * (-1));
+	}
+	return (0);
 }
