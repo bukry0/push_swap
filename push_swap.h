@@ -44,31 +44,31 @@ void		free_node(t_node *node);
 void		free_split(char **arr);
 void		free_stack(t_node **stack);
 
-size_t		ft_strlen(const char *s);
 long long	ft_atoi(char *str);
 char		**ft_split(char const *s, char c);
+size_t		ft_strlen(const char *s);
 
 int			error_check(char **argv, int argc);
 void		ft_error(void);
 int			ft_write(const char *str);
 
 t_node		*create_new_node(int data);
-t_node		*transfer_to_list(char **argv, int argc, t_node **s_a);
-int			stack_len(t_node *stack);
 int			is_sorted(t_node **stack);
+int			stack_len(t_node *stack);
+t_node		*transfer_to_list(char **argv, int argc, t_node **s_a);
 
+int			calculate_move_cost(t_stacks *stacks, int index_a, int index_b, int len_a);
+void		find_and_move_largest_in_b(t_stacks *stacks, int data_b);
+int			find_best_fit_in_a(t_stacks *stacks, int data_b);
+int			find_index_of_data(t_node *node, int data);
+int			find_min_in_a(t_stacks *stacks);
+void		move_min_to_top_a(t_stacks *stacks, int data_a);
+void		r_both_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack);
+void		ra_rrb_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack);
+void		rr_both_then_push(t_stacks *stacks, int num_a, int num_b, char push_stck);
+void		rra_rb_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack);
 void		sorting(t_stacks *stacks);
 void		sorting_for_three(t_node **s_a);
 void		turkish_algorithm(t_stacks *stacks);
-int			find_index_of_data(t_node *node, int data);
-int			find_best_fit_in_a(t_stacks *stacks, int data_b);
-int			find_min_in_a(t_stacks *stacks);
-void		move_min_to_top_a(t_stacks *stacks, int data_a);
-void		find_and_move_largest_in_b(t_stacks *stacks, int data_b);
-int			calculate_move_cost(t_stacks *stacks, int index_a, int index_b, int len_a);
-void		r_both_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack);
-void		rra_rb_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack);
-void		ra_rrb_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack);
-void		rr_both_then_push(t_stacks *stacks, int num_a, int num_b, char push_stck);
 
 #endif
