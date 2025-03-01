@@ -6,13 +6,14 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 19:39:11 by bcili             #+#    #+#             */
-/*   Updated: 2025/03/01 18:59:01 by bcili            ###   ########.fr       */
+/*   Updated: 2025/03/01 23:38:59 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	number_find_a(t_stacks *stacks, int data_b)
+// data_b den büyük en küçük sayının yerini a da buluyor
+int	find_best_fit_in_a(t_stacks *stacks, int data_b)
 {
 	int		max;
 	int		min;
@@ -39,7 +40,8 @@ int	number_find_a(t_stacks *stacks, int data_b)
 	return (min);
 }
 
-int	min_number_a(t_stacks *stacks)
+// a daki en küçük değeri buluyor
+int	find_min_in_a(t_stacks *stacks)
 {
 	int		min;
 	t_node	*temp;
@@ -55,11 +57,12 @@ int	min_number_a(t_stacks *stacks)
 	return (min);
 }
 
-void	first_min_number_a(t_stacks *stacks, int data_a)
+//a dan b ye atmak için seçilen elemanı a da en üste getiriyor
+void	move_min_to_top_a(t_stacks *stacks, int data_a)
 {
 	int	index_a;
 
-	index_a = calculate_index(stacks->s_a, data_a);
+	index_a = find_index_of_data(stacks->s_a, data_a);
 	if (stack_len(stacks->s_a) / 2 >= index_a)
 	{
 		while (index_a > 0)
@@ -68,7 +71,7 @@ void	first_min_number_a(t_stacks *stacks, int data_a)
 			index_a--;
 		}
 	}
-	index_a = calculate_index(stacks->s_a, data_a);
+	index_a = find_index_of_data(stacks->s_a, data_a);
 	if (stack_len(stacks->s_a) / 2 < index_a)
 	{
 		while (index_a < stack_len(stacks->s_a))

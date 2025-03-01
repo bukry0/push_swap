@@ -44,14 +44,18 @@ int	main(int argc, char **argv)
 	t_stacks	*stacks;
 
 	if (argc < 2)
-		return (0);
+		exit(EXIT_FAILURE);
 	if (!error_check(argv, argc))
-		return (0);
+		exit(EXIT_FAILURE);
 	init_stacks(&stacks);
 	if (!stacks)
-		return (ft_error(), 0);
+		exit(EXIT_FAILURE);
 	if (!transfer_to_list(argv, argc, &stacks->s_a))
-		return (free(stacks), free_stack(&stacks->s_a), 0);
+	{
+		free(stacks); 
+		free_stack(&stacks->s_a);
+		exit(EXIT_FAILURE);
+	}
 	sorting(stacks);
 	free_stack(&stacks->s_a);
 	free_stack(&stacks->s_b);

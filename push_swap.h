@@ -60,15 +60,15 @@ int			is_sorted(t_node **stack);
 void		sorting(t_stacks *stacks);
 void		sorting_for_three(t_node **s_a);
 void		turkish_algorithm(t_stacks *stacks);
-int			calculate_index(t_node *node, int data);
-int			number_find_a(t_stacks *stacks, int data_b);
-int			min_number_a(t_stacks *stacks);
-void		first_min_number_a(t_stacks *stacks, int data_a);
-void		max_number_find_b(t_stacks *stacks, int data_b);
-int			move_count(t_stacks *stacks, int index_a, int index_b, int len_a);
-void		plus_plus(t_stacks *stacks, int num_a, int num_b, char push_stack);
-void		minus_plus(t_stacks *stacks, int num_a, int num_b, char push_stack);
-void		plus_minus(t_stacks *stacks, int num_a, int num_b, char push_stack);
-void		minus_minus(t_stacks *stacks, int num_a, int num_b, char push_stck);
+int			find_index_of_data(t_node *node, int data);
+int			find_best_fit_in_a(t_stacks *stacks, int data_b);
+int			find_min_in_a(t_stacks *stacks);
+void		move_min_to_top_a(t_stacks *stacks, int data_a);
+void		find_and_move_largest_in_b(t_stacks *stacks, int data_b);
+int			calculate_move_cost(t_stacks *stacks, int index_a, int index_b, int len_a);
+void		r_both_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack);
+void		rra_rb_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack);
+void		ra_rrb_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack);
+void		rr_both_then_push(t_stacks *stacks, int num_a, int num_b, char push_stck);
 
 #endif
