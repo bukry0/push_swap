@@ -74,9 +74,9 @@ int	error_check(char **argv, int argc)
 
 	if (argc == 2)
 	{
-		if (!*argv[1])
-			return (0);
 		a = ft_split(argv[1], ' ');
+		if (!*argv[1] || !a[0])
+			return (free_split(a), 0);
 		i = -1;
 		while (a[++i])
 		{

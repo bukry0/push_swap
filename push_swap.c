@@ -26,7 +26,7 @@ int	ft_write(const char *str)
 
 void	ft_error(void)
 {
-	ft_write("Error\n");
+	write(2, "Error\n", 6);
 }
 
 static void	init_stacks(t_stacks **stacks)

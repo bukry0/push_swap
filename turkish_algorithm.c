@@ -6,13 +6,12 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:13:16 by bcili             #+#    #+#             */
-/*   Updated: 2025/03/02 11:48:06 by bcili            ###   ########.fr       */
+/*   Updated: 2025/03/02 13:05:52 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// verilen datanın hangi düğümde olduğunu buluyor
 int	find_index_of_data(t_node *node, int data)
 {
 	int		i;
@@ -28,7 +27,6 @@ int	find_index_of_data(t_node *node, int data)
 	return (i);
 }
 
-// seçilen sayıların en üste nasıl hizalanacağını belirler
 static void	chse_rtion_and_push(t_stacks *stacks, int n_a, int n_b, char p_stk)
 {
 	int	index_a;
@@ -54,7 +52,6 @@ static void	chse_rtion_and_push(t_stacks *stacks, int n_a, int n_b, char p_stk)
 		rr_both_then_push(stacks, n_a, n_b, p_stk);
 }
 
-//data_a için b de olması gereken yeri buluyor
 static int	find_best_fit_in_b(t_stacks *stacks, int data_a)
 {
 	int		min;
@@ -82,7 +79,6 @@ static int	find_best_fit_in_b(t_stacks *stacks, int data_a)
 	return (max);
 }
 
-// b ye atmak için en uygun sayıyı buluyor
 static int	find_best_to_push_to_b(t_stacks *stacks, int res_move, int res_num)
 {
 	int		move;

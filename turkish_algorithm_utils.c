@@ -6,7 +6,7 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:15:35 by bcili             #+#    #+#             */
-/*   Updated: 2025/03/01 23:40:29 by bcili            ###   ########.fr       */
+/*   Updated: 2025/03/02 13:05:39 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	stack_len(t_node *stack)
 	return (len);
 }
 
-// b deki en büyük elemanı en üste taşır
 static void	move_max_to_top_b(t_stacks *stacks, int max_index)
 {
 	if (stack_len(stacks->s_b) / 2 > max_index)
@@ -46,7 +45,6 @@ static void	move_max_to_top_b(t_stacks *stacks, int max_index)
 	}
 }
 
-// data_b den büyük en büyük sayıyı en üste getirir
 void	find_and_move_largest_in_b(t_stacks *stacks, int data_b)
 {
 	int		max;
@@ -65,7 +63,6 @@ void	find_and_move_largest_in_b(t_stacks *stacks, int data_b)
 	move_max_to_top_b(stacks, max_index);
 }
 
-// taşıma maliyetini indexler kullanarak hesaplıyor
 int	calculate_move_cost(t_stacks *stacks, int index_a, int index_b, int len_a)
 {
 	int	len_b;

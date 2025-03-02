@@ -6,13 +6,12 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 19:39:11 by bcili             #+#    #+#             */
-/*   Updated: 2025/03/01 23:38:59 by bcili            ###   ########.fr       */
+/*   Updated: 2025/03/02 13:05:12 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// data_b den büyük en küçük sayının yerini a da buluyor
 int	find_best_fit_in_a(t_stacks *stacks, int data_b)
 {
 	int		max;
@@ -40,7 +39,6 @@ int	find_best_fit_in_a(t_stacks *stacks, int data_b)
 	return (min);
 }
 
-// a daki en küçük değeri buluyor
 int	find_min_in_a(t_stacks *stacks)
 {
 	int		min;
@@ -57,7 +55,6 @@ int	find_min_in_a(t_stacks *stacks)
 	return (min);
 }
 
-//a dan b ye atmak için seçilen elemanı a da en üste getiriyor
 void	move_min_to_top_a(t_stacks *stacks, int data_a)
 {
 	int	index_a;

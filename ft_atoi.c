@@ -6,7 +6,7 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 16:07:54 by bcili             #+#    #+#             */
-/*   Updated: 2025/03/01 19:02:47 by bcili            ###   ########.fr       */
+/*   Updated: 2025/03/02 14:16:47 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ long long	ft_atoi(char *str)
 	long long	result;
 	int			sign;
 
+	if ((str[0] == '-' || str[0] == '+') && !ft_atoi(str + 1))
+		return (0);
 	result = 0;
 	sign = handle_sign(&str);
 	while (*str >= '0' && *str <= '9')

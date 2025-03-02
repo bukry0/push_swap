@@ -6,13 +6,12 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 13:30:19 by bcili             #+#    #+#             */
-/*   Updated: 2025/03/02 11:46:14 by bcili            ###   ########.fr       */
+/*   Updated: 2025/03/02 13:05:30 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// seçilen değerler iki stackde de yukarı hareket ettirilecekse
 void	r_both_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 {
 	int	index_a;
@@ -42,7 +41,6 @@ void	r_both_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 		push_a(&stacks->s_a, &stacks->s_b);
 }
 
-// a aşağı b yukarı hareket ettirilecekse
 void	rra_rb_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 {
 	int	index_a;
@@ -66,7 +64,6 @@ void	rra_rb_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 		push_a(&stacks->s_a, &stacks->s_b);
 }
 
-// a yukarı b aşağı hareket edecekse
 void	ra_rrb_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 {
 	int	index_a;
@@ -90,7 +87,6 @@ void	ra_rrb_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 		push_a(&stacks->s_a, &stacks->s_b);
 }
 
-// ikisi de aşağı hareket ettirilecekse
 void	rr_both_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 {
 	int	index_a;
