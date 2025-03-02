@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "stdio.h"
 
 int	ft_write(const char *str)
 {
@@ -52,7 +51,7 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	if (!transfer_to_list(argv, argc, &stacks->s_a))
 	{
-		free(stacks); 
+		free(stacks);
 		free_stack(&stacks->s_a);
 		exit(EXIT_FAILURE);
 	}

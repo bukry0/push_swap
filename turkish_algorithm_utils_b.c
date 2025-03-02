@@ -6,20 +6,20 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 13:30:19 by bcili             #+#    #+#             */
-/*   Updated: 2025/03/01 23:40:09 by bcili            ###   ########.fr       */
+/*   Updated: 2025/03/02 11:46:14 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// seçilen değerler iki stacksde de yukarı hareket ettirilecekse
-void	r_both_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack)
+// seçilen değerler iki stackde de yukarı hareket ettirilecekse
+void	r_both_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 {
 	int	index_a;
 	int	index_b;
 
-	index_a = find_index_of_data(stacks->s_a, num_a);
-	index_b = find_index_of_data(stacks->s_b, num_b);
+	index_a = find_index_of_data(stacks->s_a, n_a);
+	index_b = find_index_of_data(stacks->s_b, n_b);
 	while (index_a > 0 && index_b > 0)
 	{
 		rotate_both(&stacks->s_a, &stacks->s_b);
@@ -43,13 +43,13 @@ void	r_both_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack)
 }
 
 // a aşağı b yukarı hareket ettirilecekse
-void	rra_rb_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack)
+void	rra_rb_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 {
 	int	index_a;
 	int	index_b;
 
-	index_a = find_index_of_data(stacks->s_a, num_a);
-	index_b = find_index_of_data(stacks->s_b, num_b);
+	index_a = find_index_of_data(stacks->s_a, n_a);
+	index_b = find_index_of_data(stacks->s_b, n_b);
 	while (index_a < stack_len(stacks->s_a))
 	{
 		reverse_rotate_a(&stacks->s_a);
@@ -67,13 +67,13 @@ void	rra_rb_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack)
 }
 
 // a yukarı b aşağı hareket edecekse
-void	ra_rrb_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack)
+void	ra_rrb_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 {
 	int	index_a;
 	int	index_b;
 
-	index_a = find_index_of_data(stacks->s_a, num_a);
-	index_b = find_index_of_data(stacks->s_b, num_b);
+	index_a = find_index_of_data(stacks->s_a, n_a);
+	index_b = find_index_of_data(stacks->s_b, n_b);
 	while (index_b < stack_len(stacks->s_b))
 	{
 		reverse_rotate_b(&stacks->s_b);
@@ -91,13 +91,13 @@ void	ra_rrb_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack)
 }
 
 // ikisi de aşağı hareket ettirilecekse
-void	rr_both_then_push(t_stacks *stacks, int num_a, int num_b, char push_stack)
+void	rr_both_then_push(t_stacks *stacks, int n_a, int n_b, char push_stack)
 {
 	int	index_a;
 	int	index_b;
 
-	index_a = find_index_of_data(stacks->s_a, num_a);
-	index_b = find_index_of_data(stacks->s_b, num_b);
+	index_a = find_index_of_data(stacks->s_a, n_a);
+	index_b = find_index_of_data(stacks->s_b, n_b);
 	while (index_a < stack_len(stacks->s_a) && index_b < stack_len(stacks->s_b))
 	{
 		reverse_rotate_both(&stacks->s_a, &stacks->s_b);
